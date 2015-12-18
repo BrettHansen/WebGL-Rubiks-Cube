@@ -11,6 +11,7 @@ var skyTexture;
 // Global vars that hold all info for each shape
 var world;
 var cubies = []
+var rotationSequence = [];
 
 // modelview, projection, and camera matrices
 var modelView;
@@ -145,8 +146,7 @@ function makeObject(shape, texID) {
     return object;
 }
 
-window.onload = function init()
-{
+window.onload = function init() {
     canvas = document.getElementById( "gl-canvas" );
     
     initGL(canvas);
@@ -350,130 +350,10 @@ function resizeWindow() {
 function handleKeyDown(event) {
     rotateFace(event.keyCode, event.shiftKey);
 
-    // Check to see if we are "locked". This happens if we are in the middle of a turn animation
-    // If we are, do nothing and ignore the key. (Probably better way of doing this so we can
-    // keep track of them or something) If we aren't locked, determine the key pressed
-    // if(lock === false) {
-        // Reset the array of cubies that the render loop looks at to determine if and
-        // which faces need to be tured
-        // cubiesToTurn = [];
-
-
-    //     if (String.fromCharCode(event.keyCode) == "R") {
-    //         rotateFace(event.keyCode, event.shiftKey);
-    //     }
-    //     if (String.fromCharCode(event.keyCode) == "F") {
-    //         lock = true;
-    //         cubiesToTurn.push(
-    //             cubies[7],  cubies[8],  cubies[9],
-    //             cubies[16], cubies[17], cubies[18],
-    //             cubies[25], cubies[26], cubies[27]);
-
-    //         if(event.shiftKey) {
-    //             rotationDirection = COUNTERCLOCKWISE;
-    //         }
-            
-    //         rotationAxis = [0,0,-1 * rotationDirection];
-    //         theta += THETA_PER_TICK;
-    //         lastTurn = FRONT_FACE;
-    //     }
-    //     if (String.fromCharCode(event.keyCode) == "U") {
-    //         lock = true;
-    //         cubiesToTurn.push(
-    //             cubies[1], cubies[2], cubies[3],
-    //             cubies[4], cubies[5], cubies[6],
-    //             cubies[7], cubies[8], cubies[9]);
-
-    //         if(event.shiftKey) {
-    //             rotationDirection = COUNTERCLOCKWISE;
-    //         }
-            
-    //         rotationAxis = [0,-1 * rotationDirection,0]; 
-    //         theta += THETA_PER_TICK;
-    //         lastTurn = UP_FACE;
-    //    }
-    //     if (String.fromCharCode(event.keyCode) == "L") {
-    //         lock = true;
-    //         cubiesToTurn.push(
-    //             cubies[1],  cubies[4],  cubies[7],
-    //             cubies[10], cubies[13], cubies[16],
-    //             cubies[19], cubies[22], cubies[25]);
-
-    //         if(event.shiftKey) {
-    //             rotationDirection = COUNTERCLOCKWISE;
-    //         }
-            
-    //         rotationAxis = [1 * rotationDirection,0,0];
-    //         theta += THETA_PER_TICK;
-    //         lastTurn = LEFT_FACE;
-    //     }
-    //     if (String.fromCharCode(event.keyCode) == "B") {
-    //         lock = true;
-    //         cubiesToTurn.push(
-    //             cubies[1],  cubies[2],  cubies[3],
-    //             cubies[10], cubies[11], cubies[12],
-    //             cubies[19], cubies[20], cubies[21]);
-
-    //         if(event.shiftKey) {
-    //             rotationDirection = COUNTERCLOCKWISE;
-    //         }
-            
-    //         rotationAxis = [0,0,1 * rotationDirection];
-    //         theta += THETA_PER_TICK;
-    //         lastTurn = BACK_FACE;
-    //     }
-    //     if (String.fromCharCode(event.keyCode) == "D") {
-    //         lock = true;
-    //         cubiesToTurn.push(
-    //             cubies[19], cubies[20], cubies[21],
-    //             cubies[22], cubies[23], cubies[24], 
-    //             cubies[25], cubies[26], cubies[27]);
-
-    //         if(event.shiftKey) {
-    //             rotationDirection = COUNTERCLOCKWISE;
-    //         }
-            
-    //         rotationAxis = [0,1 * rotationDirection,0];
-    //         theta += THETA_PER_TICK;
-    //         lastTurn = DOWN_FACE;
-    //     }
-    //     if (String.fromCharCode(event.keyCode) == "X") {
-    //         lock = true;
-    //         cubiesToTurn = cubies;
-
-    //         if(event.shiftKey) {
-    //             rotationDirection = COUNTERCLOCKWISE;
-    //         }
-            
-    //         rotationAxis = [-1 * rotationDirection,0,0];
-    //         theta += THETA_PER_TICK;
-    //         lastTurn = X_ROTATION;
-    //     }
-    //     if (String.fromCharCode(event.keyCode) == "Y") {
-    //         lock = true;
-    //         cubiesToTurn = cubies;
-
-    //         if(event.shiftKey) {
-    //             rotationDirection = COUNTERCLOCKWISE;
-    //         }
-            
-    //         rotationAxis = [0,-1 * rotationDirection,0];
-    //         theta += THETA_PER_TICK;
-    //         lastTurn = Y_ROTATION;
-    //     }
-    //     if (String.fromCharCode(event.keyCode) == "Z") {
-    //         lock = true;
-    //         cubiesToTurn = cubies;
-
-    //         if(event.shiftKey) {
-    //             rotationDirection = COUNTERCLOCKWISE;
-    //         }
-            
-    //         rotationAxis = [0,0,-1 * rotationDirection];
-    //         theta += THETA_PER_TICK;
-    //         lastTurn = Z_ROTATION;
-    //     }
-    // }
+    if(String.fromCharCode(event.keyCode) == "S") {
+        addRandomRotationsToSequence(20);
+        rotateFromSequence();
+    }
 }
 
 function rotateFace(face, isShift) {
@@ -653,7 +533,6 @@ function drawShape(object) {
     gl.drawElements(gl.TRIANGLES, object.vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 }
 
-
 function render() {
 
     gl.clear( gl.COLOR_BUFFER_BIT );
@@ -803,6 +682,8 @@ function render() {
         // Finally we can unlock the cube and rest the turn direction
         rotationDirection = CLOCKWISE;
         lock = false;
+
+        rotateFromSequence();
     }
 
     
@@ -811,4 +692,36 @@ function render() {
     
     // increment our timer
     tick += 1;
+}
+
+function rot(face, isShift) {
+    return [face.charCodeAt(0), isShift];
+}
+
+function rotateFromSequence() {
+    if(rotationSequence.length != 0) {
+        var nextRotate = rotationSequence[0];
+        rotationSequence.splice(0, 1);
+        rotateFace(nextRotate[0], nextRotate[1]);
+    } 
+}
+
+function addRandomRotationsToSequence(numOfRotations) {
+    var lastRotation;
+    for(var i = 0; i < numOfRotations; i++) {
+        var rotation;
+        var faces = ["U", "D", "R", "L", "F", "B"];
+        var directions = [true, false];
+        var randFace = faces[Math.floor(Math.random() * 6)];
+        var randDir = directions[Math.floor(Math.random() * 2)];
+        var currentRotation = rot(randFace, randDir);
+
+        // Stop singly reversing actions
+        if(lastRotation != null && lastRotation[0] == currentRotation[0] && lastRotation[1] != currentRotation[1]) {
+            i--;
+        } else {
+            lastRotation = currentRotation;
+            rotationSequence.push(lastRotation);
+        }
+    }
 }

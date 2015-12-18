@@ -348,130 +348,132 @@ function resizeWindow() {
 }
 
 function handleKeyDown(event) {
+    rotateFace(event.keyCode, event.shiftKey);
+
     // Check to see if we are "locked". This happens if we are in the middle of a turn animation
     // If we are, do nothing and ignore the key. (Probably better way of doing this so we can
     // keep track of them or something) If we aren't locked, determine the key pressed
-    if(lock === false) {
+    // if(lock === false) {
         // Reset the array of cubies that the render loop looks at to determine if and
         // which faces need to be tured
-        cubiesToTurn = [];
+        // cubiesToTurn = [];
 
-        if (String.fromCharCode(event.keyCode) == "R") {
-            rotateFace(event.keyCode, event.shiftKey);
-            console.log("right face");
-        }
-        if (String.fromCharCode(event.keyCode) == "F") {
-            lock = true;
-            cubiesToTurn.push(
-                cubies[7],  cubies[8],  cubies[9],
-                cubies[16], cubies[17], cubies[18],
-                cubies[25], cubies[26], cubies[27]);
 
-            if(event.shiftKey) {
-                rotationDirection = COUNTERCLOCKWISE;
-            }
+    //     if (String.fromCharCode(event.keyCode) == "R") {
+    //         rotateFace(event.keyCode, event.shiftKey);
+    //     }
+    //     if (String.fromCharCode(event.keyCode) == "F") {
+    //         lock = true;
+    //         cubiesToTurn.push(
+    //             cubies[7],  cubies[8],  cubies[9],
+    //             cubies[16], cubies[17], cubies[18],
+    //             cubies[25], cubies[26], cubies[27]);
+
+    //         if(event.shiftKey) {
+    //             rotationDirection = COUNTERCLOCKWISE;
+    //         }
             
-            rotationAxis = [0,0,-1 * rotationDirection];
-            theta += THETA_PER_TICK;
-            lastTurn = FRONT_FACE;
-        }
-        if (String.fromCharCode(event.keyCode) == "U") {
-            lock = true;
-            cubiesToTurn.push(
-                cubies[1], cubies[2], cubies[3],
-                cubies[4], cubies[5], cubies[6],
-                cubies[7], cubies[8], cubies[9]);
+    //         rotationAxis = [0,0,-1 * rotationDirection];
+    //         theta += THETA_PER_TICK;
+    //         lastTurn = FRONT_FACE;
+    //     }
+    //     if (String.fromCharCode(event.keyCode) == "U") {
+    //         lock = true;
+    //         cubiesToTurn.push(
+    //             cubies[1], cubies[2], cubies[3],
+    //             cubies[4], cubies[5], cubies[6],
+    //             cubies[7], cubies[8], cubies[9]);
 
-            if(event.shiftKey) {
-                rotationDirection = COUNTERCLOCKWISE;
-            }
+    //         if(event.shiftKey) {
+    //             rotationDirection = COUNTERCLOCKWISE;
+    //         }
             
-            rotationAxis = [0,-1 * rotationDirection,0]; 
-            theta += THETA_PER_TICK;
-            lastTurn = UP_FACE;
-       }
-        if (String.fromCharCode(event.keyCode) == "L") {
-            lock = true;
-            cubiesToTurn.push(
-                cubies[1],  cubies[4],  cubies[7],
-                cubies[10], cubies[13], cubies[16],
-                cubies[19], cubies[22], cubies[25]);
+    //         rotationAxis = [0,-1 * rotationDirection,0]; 
+    //         theta += THETA_PER_TICK;
+    //         lastTurn = UP_FACE;
+    //    }
+    //     if (String.fromCharCode(event.keyCode) == "L") {
+    //         lock = true;
+    //         cubiesToTurn.push(
+    //             cubies[1],  cubies[4],  cubies[7],
+    //             cubies[10], cubies[13], cubies[16],
+    //             cubies[19], cubies[22], cubies[25]);
 
-            if(event.shiftKey) {
-                rotationDirection = COUNTERCLOCKWISE;
-            }
+    //         if(event.shiftKey) {
+    //             rotationDirection = COUNTERCLOCKWISE;
+    //         }
             
-            rotationAxis = [1 * rotationDirection,0,0];
-            theta += THETA_PER_TICK;
-            lastTurn = LEFT_FACE;
-        }
-        if (String.fromCharCode(event.keyCode) == "B") {
-            lock = true;
-            cubiesToTurn.push(
-                cubies[1],  cubies[2],  cubies[3],
-                cubies[10], cubies[11], cubies[12],
-                cubies[19], cubies[20], cubies[21]);
+    //         rotationAxis = [1 * rotationDirection,0,0];
+    //         theta += THETA_PER_TICK;
+    //         lastTurn = LEFT_FACE;
+    //     }
+    //     if (String.fromCharCode(event.keyCode) == "B") {
+    //         lock = true;
+    //         cubiesToTurn.push(
+    //             cubies[1],  cubies[2],  cubies[3],
+    //             cubies[10], cubies[11], cubies[12],
+    //             cubies[19], cubies[20], cubies[21]);
 
-            if(event.shiftKey) {
-                rotationDirection = COUNTERCLOCKWISE;
-            }
+    //         if(event.shiftKey) {
+    //             rotationDirection = COUNTERCLOCKWISE;
+    //         }
             
-            rotationAxis = [0,0,1 * rotationDirection];
-            theta += THETA_PER_TICK;
-            lastTurn = BACK_FACE;
-        }
-        if (String.fromCharCode(event.keyCode) == "D") {
-            lock = true;
-            cubiesToTurn.push(
-                cubies[19], cubies[20], cubies[21],
-                cubies[22], cubies[23], cubies[24], 
-                cubies[25], cubies[26], cubies[27]);
+    //         rotationAxis = [0,0,1 * rotationDirection];
+    //         theta += THETA_PER_TICK;
+    //         lastTurn = BACK_FACE;
+    //     }
+    //     if (String.fromCharCode(event.keyCode) == "D") {
+    //         lock = true;
+    //         cubiesToTurn.push(
+    //             cubies[19], cubies[20], cubies[21],
+    //             cubies[22], cubies[23], cubies[24], 
+    //             cubies[25], cubies[26], cubies[27]);
 
-            if(event.shiftKey) {
-                rotationDirection = COUNTERCLOCKWISE;
-            }
+    //         if(event.shiftKey) {
+    //             rotationDirection = COUNTERCLOCKWISE;
+    //         }
             
-            rotationAxis = [0,1 * rotationDirection,0];
-            theta += THETA_PER_TICK;
-            lastTurn = DOWN_FACE;
-        }
-        if (String.fromCharCode(event.keyCode) == "X") {
-            lock = true;
-            cubiesToTurn = cubies;
+    //         rotationAxis = [0,1 * rotationDirection,0];
+    //         theta += THETA_PER_TICK;
+    //         lastTurn = DOWN_FACE;
+    //     }
+    //     if (String.fromCharCode(event.keyCode) == "X") {
+    //         lock = true;
+    //         cubiesToTurn = cubies;
 
-            if(event.shiftKey) {
-                rotationDirection = COUNTERCLOCKWISE;
-            }
+    //         if(event.shiftKey) {
+    //             rotationDirection = COUNTERCLOCKWISE;
+    //         }
             
-            rotationAxis = [-1 * rotationDirection,0,0];
-            theta += THETA_PER_TICK;
-            lastTurn = X_ROTATION;
-        }
-        if (String.fromCharCode(event.keyCode) == "Y") {
-            lock = true;
-            cubiesToTurn = cubies;
+    //         rotationAxis = [-1 * rotationDirection,0,0];
+    //         theta += THETA_PER_TICK;
+    //         lastTurn = X_ROTATION;
+    //     }
+    //     if (String.fromCharCode(event.keyCode) == "Y") {
+    //         lock = true;
+    //         cubiesToTurn = cubies;
 
-            if(event.shiftKey) {
-                rotationDirection = COUNTERCLOCKWISE;
-            }
+    //         if(event.shiftKey) {
+    //             rotationDirection = COUNTERCLOCKWISE;
+    //         }
             
-            rotationAxis = [0,-1 * rotationDirection,0];
-            theta += THETA_PER_TICK;
-            lastTurn = Y_ROTATION;
-        }
-        if (String.fromCharCode(event.keyCode) == "Z") {
-            lock = true;
-            cubiesToTurn = cubies;
+    //         rotationAxis = [0,-1 * rotationDirection,0];
+    //         theta += THETA_PER_TICK;
+    //         lastTurn = Y_ROTATION;
+    //     }
+    //     if (String.fromCharCode(event.keyCode) == "Z") {
+    //         lock = true;
+    //         cubiesToTurn = cubies;
 
-            if(event.shiftKey) {
-                rotationDirection = COUNTERCLOCKWISE;
-            }
+    //         if(event.shiftKey) {
+    //             rotationDirection = COUNTERCLOCKWISE;
+    //         }
             
-            rotationAxis = [0,0,-1 * rotationDirection];
-            theta += THETA_PER_TICK;
-            lastTurn = Z_ROTATION;
-        }
-    }
+    //         rotationAxis = [0,0,-1 * rotationDirection];
+    //         theta += THETA_PER_TICK;
+    //         lastTurn = Z_ROTATION;
+    //     }
+    // }
 }
 
 function rotateFace(face, isShift) {

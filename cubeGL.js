@@ -357,7 +357,8 @@ function handleKeyDown(event) {
         cubiesToTurn = [];
 
         if (String.fromCharCode(event.keyCode) == "R") {
-            rotateFace(event.keyCode, even.shiftKey);
+            rotateFace(event.keyCode, event.shiftKey);
+            console.log("right face");
         }
         if (String.fromCharCode(event.keyCode) == "F") {
             lock = true;

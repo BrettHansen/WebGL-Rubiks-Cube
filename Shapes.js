@@ -58,7 +58,12 @@ function cone(radiusTop, radiusBottom, height, sample)  {
     return shape;
 }
 function cube(size) {
-    return prism(size, size, size);
+    var c = prism(size, size, size);
+    c.ori_x = ORI_0;
+    c.ori_y = ORI_0;
+    c.ori_z = ORI_0;
+
+    return c;
 }
 function prism(w, h, l) {
     var shape = [];

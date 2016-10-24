@@ -5,7 +5,7 @@ function XRot(cubies) {
     cubies[27] = cubies[21];
     cubies[21] = temp;
 
-    var temp = cubies[6];
+    temp = cubies[6];
     cubies[6] = cubies[18];
     cubies[18] = cubies[24];
     cubies[24] = cubies[12];
@@ -33,10 +33,7 @@ function XRot(cubies) {
     cubies[5] = cubies[17];
     cubies[17] = cubies[23];
     cubies[23] = cubies[11];
-    cubies[11] = temp;
-
-    for(var i in cubies)
-        cubies[i].ori_x = cubies[i].ori_x + 1 % 4;
+    cubies[11] = temp;   
 }
 
 function XPRot(cubies) {
@@ -81,9 +78,6 @@ function YRot(cubies) {
     cubies[13] = cubies[17];
     cubies[17] = cubies[15];
     cubies[15] = temp;
-
-    for(var i in cubies)
-        cubies[i].ori_y = cubies[i].ori_y + 3 % 4;
 }
 
 function YPRot(cubies) {
@@ -111,21 +105,11 @@ function RTurn(cubies) {
     cubies[27] = cubies[21];
     cubies[21] = temp;
 
-    cubies[3] = cubies[3].ori_x + 1 % 4;
-    cubies[9] = cubies[9].ori_x + 1 % 4;
-    cubies[27] = cubies[27].ori_x + 1 % 4;
-    cubies[21] = cubies[21].ori_x + 1 % 4;
-
-    var temp = cubies[6];
+    temp = cubies[6];
     cubies[6] = cubies[18];
     cubies[18] = cubies[24];
     cubies[24] = cubies[12];
     cubies[12] = temp;
-
-    cubies[6] = cubies[6].ori_x + 1 % 4;
-    cubies[18] = cubies[18].ori_x + 1 % 4;
-    cubies[24] = cubies[24].ori_x + 1 % 4;
-    cubies[12] = cubies[12].ori_x + 1 % 4;
 }
 
 function RPTurn(cubies) {

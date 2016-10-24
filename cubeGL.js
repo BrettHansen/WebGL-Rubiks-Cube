@@ -38,12 +38,6 @@ var X_ROTATION = 7;
 var Y_ROTATION = 8;
 var Z_ROTATION = 9;
 
-// Constants for cubie orientation
-var ORI_0 = 0;
-var ORI_1 = 1;
-var ORI_2 = 2;
-var ORI_3 = 3;
-
 // Misc Constants
 var THETA_PER_TICK = 10;
 
@@ -194,69 +188,56 @@ window.onload = function init() {
     // texture coordinates and then pushing them to the cubie array.
     var c1 = cube(1);
     c1.texCoords = [texBLACK, texBLACK, texBLUE, texRED, texYELLOW, texBLACK];
-    c1.abs = 1;
     cubies.push(makeObject(c1, cubeTexture));
 
     var c2 = cube(1);
     c2.texCoords = [texBLACK, texBLACK, texBLUE, texBLACK, texYELLOW, texBLACK];
-    c2.abs = 2;
     cubies.push(makeObject(c2, cubeTexture));
 
     var c3 = cube(1);
     c3.texCoords = [texBLACK, texORANGE, texBLUE, texBLACK, texYELLOW, texBLACK];
-    c3.abs = 3;
     cubies.push(makeObject(c3, cubeTexture));
     
     var c4 = cube(1);
     c4.texCoords = [texBLACK, texBLACK, texBLACK, texRED, texYELLOW, texBLACK];
-    c4.abs = 4;
     cubies.push(makeObject(c4, cubeTexture));
 
     var c5 = cube(1);
     c5.texCoords = [texBLACK, texBLACK, texBLACK, texBLACK, texYELLOW, texBLACK];
-    c5.abs = 5;
     cubies.push(makeObject(c5, cubeTexture));
 
     var c6 = cube(1);
     c6.texCoords = [texBLACK, texORANGE, texBLACK, texBLACK, texYELLOW, texBLACK];
-    c6.abs = 6;
     cubies.push(makeObject(c6, cubeTexture));
     
     var c7 = cube(1);
     c7.texCoords = [texGREEN, texBLACK, texBLACK, texRED, texYELLOW, texBLACK];
-    c7.abs = 7;
     cubies.push(makeObject(c7, cubeTexture));
 
     var c8 = cube(1);
     c8.texCoords = [texGREEN, texBLACK, texBLACK, texBLACK, texYELLOW, texBLACK];
-    c8.abs = 8;
     cubies.push(makeObject(c8, cubeTexture));
 
     var c9 = cube(1);
     c9.texCoords = [texGREEN, texORANGE, texBLACK, texBLACK, texYELLOW, texBLACK];
-    c9.abs = 9;
     cubies.push(makeObject(c9, cubeTexture));
     
     // Create cubies for the middle layer of the cube, giving them the appropriate
     // texture coordinates and then pushing them to the cubie array.
     var c10 = cube(1);
     c10.texCoords = [texBLACK, texBLACK, texBLUE, texRED, texBLACK, texBLACK];
-    c10.abs = 10;
     cubies.push(makeObject(c10, cubeTexture));
 
     var c11 = cube(1);
     c11.texCoords = [texBLACK, texBLACK, texBLUE, texBLACK, texBLACK, texBLACK];
-    c11.abs = 11;
     cubies.push(makeObject(c11, cubeTexture));
 
     var c12 = cube(1);
     c12.texCoords = [texBLACK, texORANGE, texBLUE, texBLACK, texBLACK, texBLACK];
-    c12.abs = 12;
     cubies.push(makeObject(c12, cubeTexture));
     
     var c13 = cube(1);
     c13.texCoords = [texBLACK, texBLACK, texBLACK, texRED, texBLACK, texBLACK];
-    c13.abs = 13;
     cubies.push(makeObject(c13, cubeTexture));
 
     // Center of the cube needs no texture coords
@@ -264,69 +245,56 @@ window.onload = function init() {
 
     var c15 = cube(1);
     c15.texCoords = [texBLACK, texORANGE, texBLACK, texBLACK, texBLACK, texBLACK];
-    c15.abs = 15;
     cubies.push(makeObject(c15, cubeTexture));
     
     var c16 = cube(1);
     c16.texCoords = [texGREEN, texBLACK, texBLACK, texRED, texBLACK, texBLACK];
-    c16.abs = 16;
     cubies.push(makeObject(c16, cubeTexture));
 
     var c17 = cube(1);
     c17.texCoords = [texGREEN, texBLACK, texBLACK, texBLACK, texBLACK, texBLACK];
-    c17.abs = 17;
     cubies.push(makeObject(c17, cubeTexture));
 
     var c18 = cube(1);
     c18.texCoords = [texGREEN, texORANGE, texBLACK, texBLACK, texBLACK, texBLACK];
-    c18.abs = 18;
     cubies.push(makeObject(c18, cubeTexture));
     
     // Create cubies for the bottom layer of the cube, giving them the appropriate
     // texture coordinates and then pushing them to the cubie array.
     var c19 = cube(1);
     c19.texCoords = [texBLACK, texBLACK, texBLUE, texRED, texBLACK, texWHITE];
-    c19.abs = 19;
     cubies.push(makeObject(c19, cubeTexture));
 
     var c20 = cube(1);
     c20.texCoords = [texBLACK, texBLACK, texBLUE, texBLACK, texBLACK, texWHITE];
-    c20.abs = 20;
     cubies.push(makeObject(c20, cubeTexture));
 
     var c21 = cube(1);
     c21.texCoords = [texBLACK, texORANGE, texBLUE, texBLACK, texBLACK, texWHITE];
-    c21.abs = 21;
     cubies.push(makeObject(c21, cubeTexture));
     
     var c22 = cube(1);
     c22.texCoords = [texBLACK, texBLACK, texBLACK, texRED, texBLACK, texWHITE];
-    c22.abs = 22;
     cubies.push(makeObject(c22, cubeTexture));
 
     var c23 = cube(1);
     c23.texCoords = [texBLACK, texBLACK, texBLACK, texBLACK, texBLACK, texWHITE];
-    c23.abs = 23;
     cubies.push(makeObject(c23, cubeTexture));
 
     var c24 = cube(1);
     c24.texCoords = [texBLACK, texORANGE, texBLACK, texBLACK, texBLACK, texWHITE];
-    c24.abs = 24;
     cubies.push(makeObject(c24, cubeTexture));
     
     var c25 = cube(1);
     c25.texCoords = [texGREEN, texBLACK, texBLACK, texRED, texBLACK, texWHITE];
-    c25.abs = 25;
     cubies.push(makeObject(c25, cubeTexture));
 
     var c26 = cube(1);
     c26.texCoords = [texGREEN, texBLACK, texBLACK, texBLACK, texBLACK, texWHITE];
-    c26.abs = 26;
     cubies.push(makeObject(c26, cubeTexture));
 
     var c27 = cube(1);
     c27.texCoords = [texGREEN, texORANGE, texBLACK, texBLACK, texBLACK, texWHITE];
-    c27.abs = 27;
     cubies.push(makeObject(c27, cubeTexture));
 
     // Move all of the cubies into their individual positions
